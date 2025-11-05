@@ -61,10 +61,20 @@ Example document:
 
 ---
 
-## 💻 4. Setup MongoDB Shell (mongosh)
+## 4. Download the Server
+
+1. Install 
+   [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+
+
+## 💻 5. Setup MongoDB Shell (mongosh)
 
 1. Install Mongo Shell (if not included with Compass):  
    [https://www.mongodb.com/try/download/shell](https://www.mongodb.com/try/download/shell)
+   - Select MSI not the zip
+   
+
+
 2. Open terminal and connect:
 
    ```bash
