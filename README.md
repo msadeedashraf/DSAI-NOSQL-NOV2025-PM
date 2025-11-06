@@ -88,3 +88,102 @@ Example document:
    ```
 
 ---
+
+
+## 🧱 6. Creating Your First Database & Collection
+
+In MongoDB, a database and collection are **created automatically** when you insert your first document.
+
+Example:
+
+```js
+use school       // Switch to (or create) a database named "school"
+
+db.students.insertOne({
+  name: "Alex",
+  age: 14,
+  grade: "8th",
+  city: "Toronto"
+})
+```
+
+Output:
+
+```
+{ acknowledged: true, insertedId: ObjectId("...") }
+```
+
+Now your database **school** and collection **students** exist!
+
+---
+
+## 🔍 7. Reading (Querying) Data
+
+### Find all documents
+```js
+db.students.find()
+```
+
+### Find one document
+```js
+db.students.findOne()
+```
+
+### Filter results
+```js
+db.students.find({ city: "Toronto" })
+```
+
+### Format results nicely
+```js
+db.students.find().pretty()
+```
+
+---
+
+## ✏️ 8. Updating Documents
+
+### Update one
+```js
+db.students.updateOne(
+  { name: "Alex" },
+  { $set: { grade: "9th" } }
+)
+```
+
+### Update many
+```js
+db.students.updateMany(
+  { city: "Toronto" },
+  { $set: { country: "Canada" } }
+)
+```
+
+---
+
+## ❌ 9. Deleting Documents
+
+### Delete one
+```js
+db.students.deleteOne({ name: "Alex" })
+```
+
+### Delete many
+```js
+db.students.deleteMany({ city: "Toronto" })
+```
+
+---
+
+## 📚 10. Useful Commands
+
+| Action | Command |
+|--------|----------|
+| Show all databases | `show dbs` |
+| Use a database | `use school` |
+| Show all collections | `show collections` |
+| View current database | `db` |
+| Drop (delete) database | `db.dropDatabase()` |
+| Drop collection | `db.students.drop()` |
+
+---
