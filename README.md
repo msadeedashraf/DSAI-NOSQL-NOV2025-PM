@@ -61,7 +61,7 @@ Example document:
 
 ---
 
-## 4. Download the Server
+## 💻 4. Download the Server
 
 1. Install 
    [MongoDB Community Server](https://www.mongodb.com/try/download/community)
