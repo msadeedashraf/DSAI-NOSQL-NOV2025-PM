@@ -8,6 +8,9 @@ By the end of this tutorial, you’ll be able to:
 - Perform **CRUD** operations (Create, Read, Update, Delete)  
 - Learn essential MongoDB commands for beginners  
 
+## MongoDB W3School 
+- [Study Ref](https://www.w3schools.com/mongodb/index.php)
+
 ---
 
 ## 🧩 1. What Is MongoDB?
