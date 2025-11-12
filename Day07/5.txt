@@ -1,0 +1,6 @@
+db.studentsNew.updateOne(
+{  name: 'Ali' },
+
+{ $currentDate : { lastUpdate: true } }
+
+)

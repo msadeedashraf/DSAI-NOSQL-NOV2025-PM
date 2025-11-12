@@ -1,0 +1,26 @@
+ db.studentsNew.insertMany([
+{
+    _id: 1,
+    name: "Ali",
+    age: 20,
+    city: "Toronto",
+    grade: 85,
+    subjects: ["Math", "Science", "English"]
+  },
+  {
+    _id: 2,
+    name: "Sara",
+    age: 22,
+    city: "Ottawa",
+    grade: 90,
+    subjects: ["History", "English"]
+  },
+  {
+    _id: 3,
+    name: "John",
+    age: 19,
+    city: "Toronto",
+    grade: 72,
+    subjects: ["Math", "Art"]
+  }
+])

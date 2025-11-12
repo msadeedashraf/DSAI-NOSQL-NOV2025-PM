@@ -1,0 +1,6 @@
+db.studentsNew.updateOne( 
+		{ name:"Jhon"} , 
+		{ $inc: 
+			{grade:3 , age: 2  }   
+		}  
+			) 

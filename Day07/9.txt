@@ -1,0 +1,14 @@
+db.studentsNew.updateOne(
+{  name: 'John' },
+
+{ $addToSet : { subjects:"Art" } }
+
+)
+
+
+db.studentsNew.updateOne(
+{  name: 'John' },
+
+{ $addToSet : { subjects:"Math" } }
+
+)

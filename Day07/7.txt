@@ -1,0 +1,10 @@
+-1 ---the first element from the array
+ 1 ---the last element from the array
+
+
+db.studentsNew.updateOne(
+{  name: 'Sara' },
+
+{ $pop : { subjects:-1 } }
+
+)

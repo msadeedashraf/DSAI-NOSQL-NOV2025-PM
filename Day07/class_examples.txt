@@ -1,0 +1,835 @@
+Microsoft Windows [Version 10.0.22621.4317]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\sadeedashraf>mongosh
+Current Mongosh Log ID: 6913cc8dc0c5441869cdcdf5
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.6
+Using MongoDB:          7.0.11
+Using Mongosh:          2.2.6
+mongosh 2.5.9 is available for download: https://www.mongodb.com/try/download/shell
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2025-11-10T05:24:32.759-05:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test>
+
+test>
+
+test> use student_portal
+switched to db student_portal
+student_portal> db.students.find()
+[
+  {
+    _id: ObjectId('691274a5f964622ddbcdcdf6'),
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    program: 'CS'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdf7'),
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    program: 'CS'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdf8'),
+    name: 'Sara',
+    age: 22,
+    city: 'Ottawa',
+    grade: 91,
+    program: 'Business'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdf9'),
+    name: 'John',
+    age: 19,
+    city: 'Toronto',
+    grade: 70,
+    program: 'CS'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdfa'),
+    name: 'Maria',
+    age: 24,
+    city: 'Brampton',
+    grade: 88,
+    program: 'Math'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdfb'),
+    name: 'Omar',
+    age: 21,
+    city: 'Toronto',
+    grade: 65,
+    program: 'CS'
+  }
+]
+student_portal>
+
+student_portal>
+
+student_portal>
+
+student_portal> db.students.countDocuments()
+6
+student_portal> db.students.aggregate([ { $group:{  _id : {  name:"$name" , cstudent_portal> db.students.aggregate([ { $group:{  _id : {  name:"$name" , city:"$city"  }, count : {$sum:1} , docs: {$push : "$id"}    }   } , {$match:{count:{$gt:1}}}   ])
+[ { _id: { name: 'Ali', city: 'Toronto' }, count: 2, docs: [] } ]
+student_portal> db.students.aggregate([ { $group:{  _id : {  name:"$name" , city:"$city"  }, count : {$sum:1} , docs: {$push : "$id"}    }   } , {$match:{count:{$gt:1}}}   ]).forEach(function(doc)){ doc.ids.shift(); db.students.deleteMany({_id:{$in: docs.ids }})}
+Uncaught:
+SyntaxError: Unexpected token, expected "{" (1:181)
+
+> 1 | db.students.aggregate([ { $group:{  _id : {  name:"$name" , city:"$city"  }, count : {$sum:1} , docs: {$push : "$id"}    }   } , {$match: {count:{$gt:1}}}   ]).forEach(function(doc)){ doc.ids.shift(); db.students.deleteMany({_id:{$in: docs.ids }})}
+    |                                 ^
+  2 |
+
+student_portal> db.students.aggregate([ { $group:{  _id : {  name:"$name" , city:"$city"  }, count : {$sum:1} , docs: {$push : "$id"}    }   } , {$match:{count:{$gt:1}}}])
+[ { _id: { name: 'Ali', city: 'Toronto' }, count: 2, docs: [] } ]
+student_portal> db.students.aggregate([ { $group:{  _id : {  name:"$name" , city:"$city"  }, count : {$sum:1} , docs: {$push : "$id"}    }   } , {$match:{count:{$gt:1}}}   ]).forEach(function(doc)){ doc.ids.shift(); db.students.deleteMany({_id:{$in: docs.ids }})}
+Uncaught:
+SyntaxError: Unexpected token, expected "{" (1:181)
+
+> 1 | db.students.aggregate([ { $group:{  _id : {  name:"$name" , city:"$city"  }, count : {$sum:1} , docs: {$push : "$id"}    }   } , {$match: {count:{$gt:1}}}   ]).forEach(function(doc)){ doc.ids.shift(); db.students.deleteMany({_id:{$in: docs.ids }})}
+    |                                 ^
+  2 |
+
+student_portal> db.students.aggregate([ { $group:{  _id : {   name: 'Maria', }, count : {$sum:1} , docs: {$push : "$id"}    }   } , {$match: {count:{$gt:1}}}]
+...     age: 24,
+Uncaught:
+SyntaxError: Unexpected token, expected "," (2:4)
+
+  1 | db.students.aggregate([ { $group:{  _id : {   name: 'Maria',  }, count: {$sum:1} , docs: {$push : "$id"}    }   } , {$match: {count:{$gt:1}}}]
+> 2 |     age: 24,
+    |     ^
+  3 |
+
+student_portal>     city: 'Brampton',
+...     grade: 88,
+Uncaught:
+SyntaxError: Missing semicolon. (2:9)
+
+  1 |     city: 'Brampton',
+> 2 |     grade: 88,
+    |          ^
+  3 |
+
+student_portal>     program: 'Math'
+Math
+student_portal>
+
+student_portal>
+
+student_portal>
+
+student_portal>
+
+student_portal>
+
+student_portal> db.students.deleteOne({ _id: ObjectId('691274a5f964622ddbcdcdf6
+Uncaught:
+SyntaxError: Unterminated string constant. (1:38)
+
+> 1 | db.students.deleteOne({ _id: ObjectId('691274a5f964622ddbcdcdf6
+    |                                       ^
+  2 |
+
+student_portal>
+
+student_portal>
+
+student_portal> db.students.findOne({ _id: ObjectId('691274a5f964622ddbcdcdf6')})
+{
+  _id: ObjectId('691274a5f964622ddbcdcdf6'),
+  name: 'Ali',
+  age: 20,
+  city: 'Toronto',
+  grade: 85,
+  program: 'CS'
+}
+student_portal> db.students.deleteOne({ _id: ObjectId('691274a5f964622ddbcdcdf6')})
+{ acknowledged: true, deletedCount: 1 }
+student_portal> db.students.find()
+[
+  {
+    _id: ObjectId('69127532f964622ddbcdcdf7'),
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    program: 'CS'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdf8'),
+    name: 'Sara',
+    age: 22,
+    city: 'Ottawa',
+    grade: 91,
+    program: 'Business'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdf9'),
+    name: 'John',
+    age: 19,
+    city: 'Toronto',
+    grade: 70,
+    program: 'CS'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdfa'),
+    name: 'Maria',
+    age: 24,
+    city: 'Brampton',
+    grade: 88,
+    program: 'Math'
+  },
+  {
+    _id: ObjectId('69127532f964622ddbcdcdfb'),
+    name: 'Omar',
+    age: 21,
+    city: 'Toronto',
+    grade: 65,
+    program: 'CS'
+  }
+]
+student_portal> db.students.countDocuments()
+5
+student_portal>  db.studentsNew.insertMany(
+... {
+...     _id: 1,
+...     name: "Ali",
+...     age: 20,
+...     city: "Toronto",
+...     grade: 85,
+...     subjects: ["Math", "Science", "English"]
+...   },
+...   {
+...     _id: 2,
+...     name: "Sara",
+...     age: 22,
+...     city: "Ottawa",
+...     grade: 90,
+...     subjects: ["History", "English"]
+...   },
+...   {
+...     _id: 3,
+...     name: "John",
+...     age: 19,
+...     city: "Toronto",
+...     grade: 72,
+...     subjects: ["Math", "Art"]
+...   }
+... )
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+student_portal>  db.studentsNew.insertMany([
+... {
+...     _id: 1,
+...     name: "Ali",
+...     age: 20,
+...     city: "Toronto",
+...     grade: 85,
+...     subjects: ["Math", "Science", "English"]
+...   },
+...   {
+...     _id: 2,
+...     name: "Sara",
+...     age: 22,
+...     city: "Ottawa",
+...     grade: 90,
+...     subjects: ["History", "English"]
+...   },
+...   {
+...     _id: 3,
+...     name: "John",
+...     age: 19,
+...     city: "Toronto",
+...     grade: 72,
+...     subjects: ["Math", "Art"]
+...   }
+... ])
+{ acknowledged: true, insertedIds: { '0': 1, '1': 2, '2': 3 } }
+student_portal>
+
+student_portal>
+
+student_portal>
+
+student_portal>
+
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    subjects: [ 'Math', 'Science', 'English' ]
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    city: 'Ottawa',
+    grade: 90,
+    subjects: [ 'History', 'English' ]
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 19,
+    city: 'Toronto',
+    grade: 72,
+    subjects: [ 'Math', 'Art' ]
+  }
+]
+student_portal> db.studentsNew.updateOne({  name:"Sara"} , { $set: { grade: 89, status:"Active" } }  )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    subjects: [ 'Math', 'Science', 'English' ]
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    city: 'Ottawa',
+    grade: 89,
+    subjects: [ 'History', 'English' ],
+    status: 'Active'
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 19,
+    city: 'Toronto',
+    grade: 72,
+    subjects: [ 'Math', 'Art' ]
+  }
+]
+student_portal> db.studentsNew.updateOne(
+...             { name:"Jhon"} ,
+...             { $inc:
+...                     {grade:3 , age: 2  }
+...             }
+...                     )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    subjects: [ 'Math', 'Science', 'English' ]
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    city: 'Ottawa',
+    grade: 89,
+    subjects: [ 'History', 'English' ],
+    status: 'Active'
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 19,
+    city: 'Toronto',
+    grade: 72,
+    subjects: [ 'Math', 'Art' ]
+  }
+]
+student_portal> db.studentsNew.updateOne( { name: "John" }, { $inc: { grade:3, age: 2 } } )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    subjects: [ 'Math', 'Science', 'English' ]
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    city: 'Ottawa',
+    grade: 89,
+    subjects: [ 'History', 'English' ],
+    status: 'Active'
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    grade: 75,
+    subjects: [ 'Math', 'Art' ]
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... { name:"Sara" },
+...
+... { $unset : { city:""} }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    subjects: [ 'Math', 'Science', 'English' ]
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    grade: 89,
+    subjects: [ 'History', 'English' ],
+    status: 'Active'
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    grade: 75,
+    subjects: [ 'Math', 'Art' ]
+  }
+]
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    grade: 85,
+    subjects: [ 'Math', 'Science', 'English' ]
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    grade: 89,
+    subjects: [ 'History', 'English' ],
+    status: 'Active'
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    grade: 75,
+    subjects: [ 'Math', 'Art' ]
+  }
+]
+student_portal> db.studentsNew.updateMany(
+... {  },
+...
+... { $rename : { "grade":"marks"} }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English' ],
+    marks: 85
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'History', 'English' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... {  name: 'Ali' },
+...
+... { $currentDate : { lastUpdate: true } }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'History', 'English' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... {  name: 'Ali' },
+...
+... { $push : { subjects: "Computer Science" } }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English', 'Computer Science' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'History', 'English' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... {  name: 'Sara' },
+...
+... { $push : { subjects: "Computer Science" } }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English', 'Computer Science' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'History', 'English', 'Computer Science' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... {  name: 'Sara' },
+...
+... { $pop : { subjects:-1 } }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English', 'Computer Science' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'English', 'Computer Science' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne( { name: 'Sara' }, { $pop: { subjects: 1 } } )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English', 'Computer Science' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'English' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... {  name: 'John' },
+...
+... { $pull : { subjects:"Math" } }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English', 'Computer Science' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'English' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... {  name: 'John' },
+...
+... { $addToSet : { subjects:"Art" } }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English', 'Computer Science' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'English' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Art' ],
+    marks: 75
+  }
+]
+student_portal> db.studentsNew.updateOne(
+... {  name: 'John' },
+...
+... { $addToSet : { subjects:"Math" } }
+...
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+student_portal> db.studentsNew.find()
+[
+  {
+    _id: 1,
+    name: 'Ali',
+    age: 20,
+    city: 'Toronto',
+    subjects: [ 'Math', 'Science', 'English', 'Computer Science' ],
+    marks: 85,
+    lastUpdate: ISODate('2025-11-12T00:30:02.953Z')
+  },
+  {
+    _id: 2,
+    name: 'Sara',
+    age: 22,
+    subjects: [ 'English' ],
+    status: 'Active',
+    marks: 89
+  },
+  {
+    _id: 3,
+    name: 'John',
+    age: 21,
+    city: 'Toronto',
+    subjects: [ 'Art', 'Math' ],
+    marks: 75
+  }
+]
+student_portal>

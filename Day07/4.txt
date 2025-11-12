@@ -1,0 +1,6 @@
+db.studentsNew.updateMany(
+{  },
+
+{ $rename : { "grade":"marks"} }
+
+)
