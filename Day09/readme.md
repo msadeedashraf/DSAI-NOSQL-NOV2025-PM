@@ -46,3 +46,32 @@ db.orders.aggregate([
 
 
 ```
+
+
+
+```
+db.orders.aggregate([
+{$unwind:"$items"},
+{
+$lookup: { 
+            from :"products", 
+            localField: "items.productId", 
+            foreignField: "_id", 
+            as : "product" 
+          }
+},
+
+  {$unwind:"$product"},
+          { $group : 
+            {
+              _id:"$_id",
+              customerId: {$first:"$customerId"},
+              createdAt: {$first:"$createdAt"},
+              orderTotal: {$sum:{$multiply:["$items.qty","$product.price"]}}
+            }  
+          }
+])
+
+
+
+```
