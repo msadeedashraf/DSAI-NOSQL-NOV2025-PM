@@ -7,7 +7,7 @@
 
 - [Introduction to Git](https://learn.microsoft.com/en-us/training/paths/github-foundations/)
 
-- Exercise - Try out Git
+- Exercise ****- Try out Git
 [Exercise](https://learn.microsoft.com/en-us/training/modules/intro-to-git/2-exercise-configure-git)
 
 ## Installing Git
@@ -27,3 +27,17 @@
 - What is a VCS, discuss types and 5 other VCS beyond Git.
 - Whats is the difference between Git and Git Hub.
   
+## Day 2
+
+```
+git config --list
+
+```
+
+```
+git config --global user.name "<user name>"
+
+git config --global user.email "<user email>"
+```
+
+## Day 3
